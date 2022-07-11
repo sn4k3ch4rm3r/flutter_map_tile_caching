@@ -297,8 +297,7 @@ class DownloadManagement {
   /// Do not use to cancel background downloads, return `true` from the background download callback to cancel a background download. Background download cancellations require a few more 'shut-down' steps that can create unexpected issues and memory leaks if not carried out.
   Future<void> cancel() async {
     _queue?.dispose();
-    await _streamController?.close();
-
+    _streamController?.close();
     if (_recoveryId != null) {
       await _storeDirectory.rootDirectory.recovery.cancel(_recoveryId!);
     }
